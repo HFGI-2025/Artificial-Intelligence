@@ -26,7 +26,7 @@ jobs:
       - name: Run Homepage Generation
         uses: ./parchmentiq-repo/actions/homepage-generation
   
-  deploy:
+  deploys:
     needs: run-composite-action
     environment:
       name: github-pages
