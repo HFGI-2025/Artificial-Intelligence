@@ -160,9 +160,7 @@
                         <p>In this activity we will utilise the model we trained in the previous lesson on <strong>CNNs</strong>, to explore and interpret the predictions using the <strong>occlusion</strong> method from <strong>Captum</strong>.<br><br>To replicate the model we made previously we will need to re-initialise the model architecture, load the previously trained weights (parameters), and append it to our model.<br><br>First we will import the suite of packages we used in the previous lesson.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-1"># FIXED WITH NO OUTPUT
-
-# Import the modules required:
+                <pre><code class="language-python" id="code-1"># Import the modules required:
 import torch # this is the PyTorch module
 import torch.nn as nn # this is the neural network module
 
@@ -194,9 +192,7 @@ torch.cuda.manual_seed(SEED)</code></pre>
         <p>And we will also download and store the data from the <code>pathmnist</code> dataset, which are colons pathology samples.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-2"># FIXED WITH OUTPUT
-
-data_flag = &#x27;pathmnist&#x27;
+                <pre><code class="language-python" id="code-2">data_flag = &#x27;pathmnist&#x27;
 
 info = medmnist.INFO[data_flag]
 task = info[&#x27;task&#x27;]
@@ -215,9 +211,7 @@ The number of classes is 9
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-3"># FIXED WITH NO OUTPUT
-
-download = True
+                <pre><code class="language-python" id="code-3">download = True
 BATCH_SIZE = 128
 
 DataClass = getattr(medmnist, info[&#x27;python_class&#x27;])
@@ -243,17 +237,12 @@ test_loader = torch.utils.data.DataLoader(
                 root=&#x27;data&#x27;),
     batch_size=2*BATCH_SIZE)</code></pre>
             </div>
-            <div class="output-container"><pre class="output-stream">Downloading https://zenodo.org/records/10519652/files/pathmnist.npz?download=1 to data/pathmnist.npz
-</pre><pre class="output-stderr">  0%|          | 0.00/206M [00:00&lt;?, ?B/s]</pre><pre class="output-stderr">  0%|          | 65.5k/206M [00:00&lt;10:10, 336kB/s]</pre><pre class="output-stderr">  0%|          | 164k/206M [00:00&lt;07:48, 438kB/s] </pre><pre class="output-stderr">  0%|          | 328k/206M [00:00&lt;04:16, 802kB/s]</pre><pre class="output-stderr">  0%|          | 557k/206M [00:00&lt;03:29, 981kB/s]</pre><pre class="output-stderr">  1%|          | 1.05M/206M [00:00&lt;01:43, 1.97MB/s]</pre><pre class="output-stderr">  1%|          | 1.51M/206M [00:00&lt;01:35, 2.14MB/s]</pre><pre class="output-stderr">  1%|          | 2.56M/206M [00:01&lt;00:49, 4.09MB/s]</pre><pre class="output-stderr">  2%|▏         | 3.93M/206M [00:01&lt;00:30, 6.51MB/s]</pre><pre class="output-stderr">  3%|▎         | 5.44M/206M [00:01&lt;00:28, 7.10MB/s]</pre><pre class="output-stderr">  4%|▍         | 8.39M/206M [00:01&lt;00:16, 12.3MB/s]</pre><pre class="output-stderr">  6%|▌         | 11.7M/206M [00:01&lt;00:11, 17.4MB/s]</pre><pre class="output-stderr">  7%|▋         | 15.4M/206M [00:01&lt;00:08, 22.6MB/s]</pre><pre class="output-stderr">  9%|▉         | 19.0M/206M [00:01&lt;00:07, 26.3MB/s]</pre><pre class="output-stderr"> 11%|█         | 22.8M/206M [00:01&lt;00:06, 29.7MB/s]</pre><pre class="output-stderr"> 13%|█▎        | 26.0M/206M [00:01&lt;00:05, 30.2MB/s]</pre><pre class="output-stderr"> 15%|█▍        | 30.2M/206M [00:02&lt;00:05, 33.7MB/s]</pre><pre class="output-stderr"> 17%|█▋        | 33.9M/206M [00:02&lt;00:04, 34.7MB/s]</pre><pre class="output-stderr"> 18%|█▊        | 37.8M/206M [00:02&lt;00:04, 35.8MB/s]</pre><pre class="output-stderr"> 20%|██        | 41.5M/206M [00:02&lt;00:04, 35.9MB/s]</pre><pre class="output-stderr"> 22%|██▏       | 45.3M/206M [00:02&lt;00:04, 36.4MB/s]</pre><pre class="output-stderr"> 24%|██▍       | 49.1M/206M [00:02&lt;00:04, 36.9MB/s]</pre><pre class="output-stderr"> 26%|██▌       | 52.9M/206M [00:02&lt;00:04, 37.1MB/s]</pre><pre class="output-stderr"> 28%|██▊       | 56.7M/206M [00:02&lt;00:04, 36.9MB/s]</pre><pre class="output-stderr"> 30%|██▉       | 60.8M/206M [00:02&lt;00:03, 38.0MB/s]</pre><pre class="output-stderr"> 32%|███▏      | 65.0M/206M [00:02&lt;00:03, 39.4MB/s]</pre><pre class="output-stderr"> 34%|███▎      | 69.0M/206M [00:03&lt;00:03, 39.5MB/s]</pre><pre class="output-stderr"> 35%|███▌      | 73.0M/206M [00:03&lt;00:03, 39.0MB/s]</pre><pre class="output-stderr"> 37%|███▋      | 76.9M/206M [00:03&lt;00:03, 38.8MB/s]</pre><pre class="output-stderr"> 39%|███▉      | 80.9M/206M [00:03&lt;00:03, 39.0MB/s]</pre><pre class="output-stderr"> 41%|████      | 84.8M/206M [00:03&lt;00:03, 38.9MB/s]</pre><pre class="output-stderr"> 43%|████▎     | 88.7M/206M [00:03&lt;00:03, 38.8MB/s]</pre><pre class="output-stderr"> 45%|████▌     | 92.6M/206M [00:03&lt;00:02, 38.3MB/s]</pre><pre class="output-stderr"> 47%|████▋     | 96.4M/206M [00:03&lt;00:02, 37.9MB/s]</pre><pre class="output-stderr"> 49%|████▊     | 100M/206M [00:03&lt;00:02, 37.8MB/s] </pre><pre class="output-stderr"> 51%|█████     | 104M/206M [00:03&lt;00:02, 38.9MB/s]</pre><pre class="output-stderr"> 53%|█████▎    | 108M/206M [00:04&lt;00:02, 39.4MB/s]</pre><pre class="output-stderr"> 55%|█████▍    | 112M/206M [00:04&lt;00:02, 32.5MB/s]</pre><pre class="output-stderr"> 56%|█████▋    | 116M/206M [00:04&lt;00:02, 33.6MB/s]</pre><pre class="output-stderr"> 58%|█████▊    | 120M/206M [00:04&lt;00:02, 35.0MB/s]</pre><pre class="output-stderr"> 60%|██████    | 124M/206M [00:04&lt;00:02, 36.2MB/s]</pre><pre class="output-stderr"> 62%|██████▏   | 128M/206M [00:04&lt;00:02, 37.1MB/s]</pre><pre class="output-stderr"> 64%|██████▍   | 132M/206M [00:04&lt;00:01, 37.1MB/s]</pre><pre class="output-stderr"> 66%|██████▌   | 135M/206M [00:04&lt;00:01, 37.2MB/s]</pre><pre class="output-stderr"> 68%|██████▊   | 139M/206M [00:04&lt;00:01, 37.4MB/s]</pre><pre class="output-stderr"> 70%|██████▉   | 143M/206M [00:05&lt;00:01, 37.5MB/s]</pre><pre class="output-stderr"> 71%|███████▏  | 147M/206M [00:05&lt;00:01, 37.5MB/s]</pre><pre class="output-stderr"> 73%|███████▎  | 151M/206M [00:05&lt;00:01, 38.1MB/s]</pre><pre class="output-stderr"> 75%|███████▌  | 155M/206M [00:05&lt;00:01, 38.8MB/s]</pre><pre class="output-stderr"> 77%|███████▋  | 159M/206M [00:05&lt;00:01, 38.9MB/s]</pre><pre class="output-stderr"> 79%|███████▉  | 163M/206M [00:05&lt;00:01, 39.1MB/s]</pre><pre class="output-stderr"> 81%|████████  | 167M/206M [00:05&lt;00:00, 39.1MB/s]</pre><pre class="output-stderr"> 83%|████████▎ | 170M/206M [00:05&lt;00:00, 37.1MB/s]</pre><pre class="output-stderr"> 85%|████████▍ | 174M/206M [00:05&lt;00:00, 37.1MB/s]</pre><pre class="output-stderr"> 87%|████████▋ | 178M/206M [00:05&lt;00:00, 38.3MB/s]</pre><pre class="output-stderr"> 89%|████████▊ | 182M/206M [00:06&lt;00:00, 39.0MB/s]</pre><pre class="output-stderr"> 91%|█████████ | 187M/206M [00:06&lt;00:00, 39.8MB/s]</pre><pre class="output-stderr"> 93%|█████████▎| 191M/206M [00:06&lt;00:00, 39.8MB/s]</pre><pre class="output-stderr"> 95%|█████████▍| 195M/206M [00:06&lt;00:00, 39.8MB/s]</pre><pre class="output-stderr"> 97%|█████████▋| 199M/206M [00:06&lt;00:00, 39.8MB/s]</pre><pre class="output-stderr"> 99%|█████████▊| 203M/206M [00:06&lt;00:00, 33.0MB/s]</pre><pre class="output-stderr">100%|██████████| 206M/206M [00:06&lt;00:00, 30.7MB/s]</pre><pre class="output-stderr">
-</pre><pre class="output-stream">Using downloaded and verified file: data/pathmnist.npz
-</pre></div>
+            
         </div>
         <p>To recreate our model, we simply execute the code containing the same neural network architecture as before.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-4"># FIXED WITH OUTPUT
-
-# A CNN_Pathology model class but with dropout layers to avoid overfitting:
+                <pre><code class="language-python" id="code-4"># A CNN_Pathology model class but with dropout layers to avoid overfitting:
 
 class CNN_Pathology(nn.Module):
     def __init__(self, in_channels, num_classes):
@@ -327,9 +316,7 @@ class CNN_Pathology(nn.Module):
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-5"># FIXED WITH NO OUTPUT
-
-# Define the device
+                <pre><code class="language-python" id="code-5"># Define the device
 if torch.cuda.is_available():
     # if there are multiple GPUs, choose the first one
     device = torch.device(&quot;cuda&quot;) # Defines the device you want to have data moved to
@@ -352,15 +339,12 @@ model = CNN_Pathology(in_channels=n_channels, num_classes=n_classes)
 model.load_state_dict(torch.load(&#x27;./data/best_model.pth&#x27;, weights_only=True))
 model = model.to(device)</code></pre>
             </div>
-            <div class="output-container"><pre class="output-stream">No GPU detected! Falling back to CPU
-</pre></div>
+            
         </div>
         <p>Now everything is loaded in, we can view our model predictions to remind us of what we are working with:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-6"># FIXED WITH NO OUTPUT
-
-# load all the test set images and labels into memory:
+                <pre><code class="language-python" id="code-6"># load all the test set images and labels into memory:
 test_images = []
 test_labels = []
 for images, labels in test_loader:
@@ -374,9 +358,7 @@ test_labels = torch.cat(test_labels, dim=0)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-7"># FIXED WITH NO OUTPUT
-
-real_labels = {
+                <pre><code class="language-python" id="code-7">real_labels = {
             0: &quot;adipose&quot;,
             1: &quot;background&quot;,
             2: &quot;debris&quot;,
@@ -393,9 +375,7 @@ real_labels = {
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-8"># FIXED WITH OUTPUT
-
-# obtain one batch of test images
+                <pre><code class="language-python" id="code-8"># obtain one batch of test images
 dataiter = iter(test_loader)
 images, labels = next(dataiter)
 images = images.numpy()
@@ -443,9 +423,7 @@ plt.show()</code></pre>
                         <p>To start off, we can use an explainability method called <strong>Occlusion</strong>. This is a visualisation technique that can be used to understand the importance of different regions of an image in the model&#x27;s prediction.<br><br>It does this by occluding (hiding) different regions of the image and observing the effect on the model&#x27;s prediction. If the model&#x27;s prediction changes substantially when a region is occluded, then that region is important for the prediction. If the model&#x27;s prediction does not change, then that region is not important.</p><p><img src="./images/occlusion.png" alt="Occlusion Diagram" class="notebook-image"></p><p>For this demonstration, let us only consider the samples that were classified <strong>correctly</strong> by the model.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-9"># FIXED WITH NO OUTPUT
-
-correct_indices = []
+                <pre><code class="language-python" id="code-9">correct_indices = []
 for i in range(len(labels)):
     if preds[i] == labels[i]:
         correct_indices.append(i)
@@ -458,9 +436,7 @@ np.random.shuffle(correct_indices)</code></pre>
         <p>From the <strong>Captum</strong> package we import the Occlusion class. The Occlusion class will determine the importance of each <strong>pixel</strong> in the model&#x27;s prediction.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-10"># FIXED WITH NO OUTPUT
-
-from captum.attr import Occlusion</code></pre>
+                <pre><code class="language-python" id="code-10">from captum.attr import Occlusion</code></pre>
             </div>
             
         </div>
@@ -490,9 +466,7 @@ strides = (3, 1, 1)               # (channel_stride, height_stride, width_stride
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-12"># FIXED WITH NO OUTPUT
-
-# Load in a single image from the correctly predicted images for demonstration
+                <pre><code class="language-python" id="code-12"># Load in a single image from the correctly predicted images for demonstration
 
 # select an image from correct_indices
 IMAGE_INDEX = 11
@@ -514,9 +488,7 @@ original_label = original_label.to(device)</code></pre>
         <p>We can now use the occlusion interpreter to infer the importance of each pixel in the image for the model’s prediction. First, we get the prediction for our image which we give to the occulsion class along with the window and stride.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-13"># FIXED WITH NO OUTPUT
-
-# get the prediction of the model for the image
+                <pre><code class="language-python" id="code-13"># get the prediction of the model for the image
 model.eval() # set model to evaluation mode
 
 output = model(original_image)
@@ -540,9 +512,7 @@ real_label_text = real_labels[original_label.cpu().numpy()[0]]</code></pre>
         <h4>Visualisation</h4><p>To best understand which pixels are important we can visualise the feature importance as a heatmap. The numbers given from the <code>Occlusion</code> class can be roughly binned into 3 categories:<br><ul class="nested-list"><li><strong>Positive values</strong> (green): Regions that <strong>support</strong> the predicted class. When these areas are occluded (hidden), the model&#x27;s confidence in the prediction decreases.</li><br><li><strong>Negative values</strong> (red): Regions that <strong>contradict</strong> the predicted class. When these areas are occluded, the model&#x27;s confidence actually increases (meaning these regions were working against the prediction).</li><br><li><strong>Around zero</strong> (white): Regions that have little to no impact on the prediction. Occluding them does not significantly change the model&#x27;s output.</li></ul></p><p>First we need to augment our data so that it can be given to matplotlib:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-14"># FIXED WITH NO OUTPUT
-
-# detach the data from the PyTorch tensor
+                <pre><code class="language-python" id="code-14"># detach the data from the PyTorch tensor
 attributions_data = attributions_occ.squeeze(0).detach().cpu().numpy() # .squeeze(0) removes the first singular dimension 
 attributions_data = attributions_data[0] # We only need 1 channel
 
@@ -596,9 +566,7 @@ plt.show()</code></pre>
         <h4>Plotting issues</h4><p>Plotting it ourselves can cause issues when we wish to visually compare multiple images. This is because the colourbar is automatically adjusted to the range of values. Here, pixels that are <code>0</code> are coloured red, which would signal at a glance that they were negatively affecting the prediction, whereas we know this should mean it has little impact either for or against.<br><br>To prevent this, we could rescale the colour bar by setting a minimum or maximum. Alternatively, we can use <a href="https://captum.ai/api/utilities.html#visualization">Captum&#x27;s</a> built-in visualisation tools, which handle this automatically given their knowledge of the numerical limits of the output. This toolkit is built on top of <em>Matplotlib</em>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-16"># FIXED WITH NO OUTPUT
-
-# The Captum visualisation module
+                <pre><code class="language-python" id="code-16"># The Captum visualisation module
 from captum.attr import visualization as viz</code></pre>
             </div>
             
@@ -606,9 +574,7 @@ from captum.attr import visualization as viz</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-17"># FIXED WITH OUTPUT
-
-# The occlusion data must be transposed to work the visualisation module
+                <pre><code class="language-python" id="code-17"># The occlusion data must be transposed to work the visualisation module
 attributions_data = np.transpose(attributions_occ.squeeze(0).cpu().detach().numpy(), (1,2,0))
 
 # Extract the figure and axes from the visualisation
@@ -643,9 +609,7 @@ fig</code></pre>
                         <h4>Moving Beyond Pixel-Level Heatmaps</h4><p>Heatmaps are useful for showing which parts of an image influence the model&#x27;s decision, but they have limitations. They highlight important regions without explaining what the AI has actually learnt about those areas. To gain deeper insights, we should move beyond individual pixels and analyse meaningful regions of the image.<br><br>Ideally, we would analyse images at the level of distinct objects or structures. In medical imaging, expert pathologists sometimes provide pixel-level annotations that identify every structure in an image — this is called supervised segmentation. However, such detailed annotations are expensive and time-consuming to create.<br><br>When expert annotations are not available, unsupervised segmentation can be used to automatically divide the image into meaningful regions. This allows us to analyse how the AI interprets different structures without requiring pre-labelled data.</p><h4>Our Approach: Unsupervised Segmentation</h4><p>The following two-step process is used to segment the pathology images:<br><br><strong>Step 1 — Binarisation:</strong> We separate the tissue (foreground) from the background using Otsu&#x27;s thresholding method.<br><br><strong>Step 2 — Connected Component Analysis:</strong> Next, we identify distinct regions in the binarised image. This method groups together neighbouring pixels that belong to the same structure, giving each region a unique label. These labelled regions become our units of analysis for the explainability method.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-18"># FIXED WITH NO OUTPUT
-
-import cv2
+                <pre><code class="language-python" id="code-18">import cv2
 from skimage.filters import threshold_otsu</code></pre>
             </div>
             
@@ -663,9 +627,7 @@ from skimage.filters import threshold_otsu</code></pre>
         <h4>Step 1</h4><p>First the image is converted to greyscal, removing the colour channels. Next, we need to apply a segmentation algorithm that will automatically separate distinct structures. There are several algorithms available for this purpose, in our circumstance we will be using <strong>Otsu&#x27;s method</strong>, named after <em>Nobuyuki Otsu</em>. In its simplest form, the algorithm returns a single intensity threshold that separates pixels in two classes, the foreground and the background. To implement this algorithm we will use <a href="https://scikit-image.org/docs/0.23.x/auto_examples/segmentation/plot_thresholding.html">threshold_otsu</a> from scikit-image.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-19"># FIXED WITH OUTPUT
-
-# Use Otsu Thresholding 
+                <pre><code class="language-python" id="code-19"># Use Otsu Thresholding 
 # convert the image to grayscale
 grey = cv2.cvtColor(plot_image, cv2.COLOR_BGR2GRAY)
 
@@ -695,9 +657,7 @@ plt.show()</code></pre>
         <h4>Step 2</h4><p>The <a href="https://docs.opencv.org/3.4/d3/dc0/group__imgproc__shape.html#gaedef8c7340499ca391d459122e51bef5">Connected Components</a> function computes the number of components in the binary image based on how closely connected pixels are to others of the same intensity. The output is an identical matrix with pixels replaced with numerical labels.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-20"># FIXED WITH OUTPUT
-
-# find the connected components in the image
+                <pre><code class="language-python" id="code-20"># find the connected components in the image
 n_components, labels = cv2.connectedComponents(binary.astype(np.uint8)) # convert to 8-bit image and find labels
 
 # plot the image and the binary image in a side by side manner as a subplot
@@ -731,18 +691,14 @@ plt.show()</code></pre>
                         <p>Now we have the segment, the function <a href="https://captum.ai/api/feature_ablation.html">FeatureAblation</a> can be used instead of <strong>Occlusion</strong>. This class will occlude each segment at a time, instead of on a per pixel basis. The steps to apply and view the results are the same as for the <strong>Occlusion method</strong>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-21"># FIXED WITH NO OUTPUT
-
-from captum.attr import FeatureAblation</code></pre>
+                <pre><code class="language-python" id="code-21">from captum.attr import FeatureAblation</code></pre>
             </div>
             
         </div>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-22"># FIXED WITH NO OUTPUT
-
-# Create the feature ablation interpreter
+                <pre><code class="language-python" id="code-22"># Create the feature ablation interpreter
 feature_ablation = FeatureAblation(model)
 
 # Convert labels to a mask format that Captum can use
@@ -775,9 +731,7 @@ attribution_map = np.transpose(attribution_map, (1,2,0))
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-23"># FIXED WITH OUTPUT
-
-# Extract the figure and axes from the visualisation
+                <pre><code class="language-python" id="code-23"># Extract the figure and axes from the visualisation
 fig, ax = viz.visualize_image_attr_multiple(attribution_map,
                                       plot_image, # the same image
                                       [&#x27;original_image&#x27;, &#x27;heat_map&#x27;], # image type
@@ -799,9 +753,7 @@ fig</code></pre>
         <p>The <em>three</em> largest segments all appear to positively help with the prediction of the class. Specifically, the darker tissue segment has a score of <strong>1.0</strong>, indicating without it the model is unable to make a correct prediction.</p><h4>Comparing importance methods</h4><p>Comparing the <strong>per pixel</strong> method with the <strong>segments</strong> approach reveals an encouraging degree of overlap. However, the segment-based method produces a different pattern, as occluding entire segments has a larger effect. The positive importance values tend to spread across the whole image rather than concentrating in a single area. Since our segments come from unsupervised thresholding and we lack expertise in colon histopathology, it is difficult to determine whether we have truly segmented distinct tissue regions. Therefore, we cannot definitively say which importance map provides a better representation.<br><br>As with all approaches to understanding a model, having a domain expert is <strong>essential</strong> for extracting meaningful insights from the outcome.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-24"># FIXED WITH OUTPUT
-
-# Create figure with 5 subplots
+                <pre><code class="language-python" id="code-24"># Create figure with 5 subplots
 fig, ax = plt.subplots(1, 3, figsize=(14, 5))
 
 methods = [&#x27;heat_map&#x27;, &#x27;original_image&#x27;, &#x27;heat_map&#x27;]
@@ -862,18 +814,14 @@ plt.show()</code></pre>
                         <p>LIME, which stands for <strong>Local Interpretable Model-Agnostic Explanations</strong>, can be viewed as an extension of the feature segmentation with ablation described previously.<br><br>LIME is a versatile tool that works with any machine learning model. Similar to the occlusion method, it operates by modifying the original image, i.e. turning pixels or features on and off randomly. These altered images are then used to train a simple, more interpretable model, such as a linear model, which aims to mimic the original model&#x27;s decisions. The insights gained from the linear model help explain what the AI is focusing on in the images.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-25"># FIXED WITH NO OUTPUT
-
-from captum.attr import Lime</code></pre>
+                <pre><code class="language-python" id="code-25">from captum.attr import Lime</code></pre>
             </div>
             
         </div>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-26"># FIXED WITH NO OUTPUT
-
-# define the lime interpreter
+                <pre><code class="language-python" id="code-26"># define the lime interpreter
 lime = Lime(model)
 
 # get the model’s prediction
@@ -890,9 +838,7 @@ attributions_lime = lime.attribute(original_image,
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-27"># FIXED WITH NO OUTPUT
-
-# Prepare the data for visualisation
+                <pre><code class="language-python" id="code-27"># Prepare the data for visualisation
 lime_data = np.transpose(attributions_lime.squeeze().cpu().detach().numpy(), (1, 2, 0))</code></pre>
             </div>
             
@@ -931,9 +877,7 @@ fig</code></pre>
                         <p>To get a better understanding of any predictive differences, let us plot them all on the same figure and alter the colour map to be more distinct in the positive end of the spectrum.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-29"># FIXED WITH OUTPUT
-
-# Create figure with 5 subplots
+                <pre><code class="language-python" id="code-29"># Create figure with 5 subplots
 fig, ax = plt.subplots(1, 3, figsize=(14, 5))
 
 methods = [&#x27;heat_map&#x27;, &#x27;original_image&#x27;, &#x27;heat_map&#x27;]
@@ -996,9 +940,7 @@ plt.show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-30"># FIXED
-
-# Download this notebook from the &#x27;Resources&#x27; section, bottom left of this page,
+                <pre><code class="language-python" id="code-30"># Download this notebook from the &#x27;Resources&#x27; section, bottom left of this page,
 # and write your code in this cell.</code></pre>
             </div>
             

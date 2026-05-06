@@ -142,9 +142,7 @@
                         <h4>Data</h4><p>The dataset used in this demonstration is the Wisconsin <strong>Breast Cancer</strong> Diagnostic Database, publicly available from the <a href="https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic">University of California Irvine (UCI) Machine Learning Repository</a>. It consists of characteristics of cell nuclei taken from breast masses which were sampled using fine-needle aspiration (FNA), a common diagnostic procedure in oncology.<br><br>The features are observable characteristics of the cells in the images - for example, radius, concavity, and texture. An example of one of the digitised images from an FNA sample is given below.</p><p><img src="./images/fna_pic.png" alt="FNA picture" class="notebook-image"></p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-31"># FIXED WITH NO OUTPUT
-
-# Import the modules required:
+                <pre><code class="language-python" id="code-31"># Import the modules required:
 import torch
 import torch.nn as nn
 
@@ -168,9 +166,7 @@ torch.cuda.manual_seed(SEED)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-32"># FIXED WITH OUTPUT
-
-data = pd.read_csv(&quot;./data/breast_cancer.csv&quot;)
+                <pre><code class="language-python" id="code-32">data = pd.read_csv(&quot;./data/breast_cancer.csv&quot;)
 
 # Change the diagnosis column to binary values
 label_dict = {&#x27;M&#x27;: 1, &#x27;B&#x27;: 0}
@@ -245,9 +241,7 @@ Number of classes: 2
                         <p>We will use a simple neural network with <strong>two</strong> hidden layer and <strong>Tanh</strong> activation functions per each layer.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-33"># FIXED WITH NO OUTPUT
-
-class simpleNN(nn.Module):
+                <pre><code class="language-python" id="code-33">class simpleNN(nn.Module):
     def __init__(self, in_features):
         super().__init__()
 
@@ -284,9 +278,7 @@ class simpleNN(nn.Module):
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-34"># FIXED WITH NO OUTPUT
-
-# Define the device
+                <pre><code class="language-python" id="code-34"># Define the device
 if torch.cuda.is_available():
     # if there are multiple GPUs, choose the first one
     device = torch.device(&quot;cuda&quot;) # Defines the device you want to have data moved to
@@ -306,15 +298,12 @@ else:
 model = simpleNN(in_features=n_features)
 model = model.to(device)</code></pre>
             </div>
-            <div class="output-container"><pre class="output-stream">No GPU detected! Falling back to CPU
-</pre></div>
+            
         </div>
         <h4>Training</h4><p>As the dataset is small and the neural network simple, the model can be trained over 50 epochs almost instantly, as it converges very quickly.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-35"># FIXED WITH OUTPUT
-
-criterion = nn.CrossEntropyLoss()
+                <pre><code class="language-python" id="code-35">criterion = nn.CrossEntropyLoss()
 optimiser = torch.optim.Adam(model.parameters(), lr=0.1) # adam optimiser
 
 num_epochs = 50
@@ -344,9 +333,7 @@ Epoch 41/50 =&gt; Loss: 0.02
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-36"># FIXED WITH OUTPUT
-
-out_probs = model(input_tensor).detach().cpu().numpy()
+                <pre><code class="language-python" id="code-36">out_probs = model(input_tensor).detach().cpu().numpy()
 out_classes = np.argmax(out_probs, axis=1)
 print(&quot;Train Accuracy:&quot;, sum(out_classes == y_train) / len(y_train))
 
@@ -371,20 +358,14 @@ Test Accuracy: 0.9824561403508771
                         <p>The concept of ablating parts of the information in the test dataset can be carried over to tabular data as well. This time, we can use the <strong>FeatureAblation</strong> class to remove features rather than pixels.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-37"># FIXED WITH NO OUTPUT
-
-from captum.attr import FeatureAblation</code></pre>
+                <pre><code class="language-python" id="code-37">from captum.attr import FeatureAblation</code></pre>
             </div>
-            <div class="output-container"><pre class="output-stderr">/home/runner/work/AI3_Lesson_Resources/AI3_Lesson_Resources/self-repo/.venv/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div>
+            
         </div>
         <p>Like with the previous examples, we will only use <strong>one sample</strong> to obtain a score.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-38"># FIXED WITH OUTPUT
-
-# Get ablation class and set model to evaluation mode
+                <pre><code class="language-python" id="code-38"># Get ablation class and set model to evaluation mode
 ablation = FeatureAblation(model)
 model.eval() # set model to evaluation mode
 
@@ -425,9 +406,7 @@ attr = ablation.attribute(
         <p>Additionally to getting the scores for multiple samples, we can separate out the attributions for the positive class (malignant) and the negative class (benign) to see which features are most important for each class.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-39"># FIXED WITH OUTPUT
-
-# Collect attributions
+                <pre><code class="language-python" id="code-39"># Collect attributions
 all_attributions = {0: [], 1: []}
 
 for class_idx in range(n_classes):
@@ -478,6 +457,14 @@ plt.show()</code></pre>
             </div>
         </div>
         
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-40"># Download this notebook from the &#x27;Resources&#x27; section, bottom left of this page,
+# and write your code in this cell.</code></pre>
+            </div>
+            
+        </div>
+        
                     </div>
                 </div>
             </div>
@@ -489,18 +476,14 @@ plt.show()</code></pre>
                         <p>An alternative to feature ablation is to calculate how much each feature contributes through their integrated gradients. This method measures how much each feature contributes to the final prediction by computing gradients along a path from a baseline (e.g., zeros or average values) to the actual input.<br><br>Rather than simply removing features, Integrated Gradients creates many intermediate points between the baseline and your input, calculates how sensitive the model is to each feature at each point, and then averages these sensitivities.<br><br>This gradient-based approach is often more efficient than ablation for high-dimensional data.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-40"># FIXED WITH NO OUTPUT
-
-from captum.attr import IntegratedGradients</code></pre>
+                <pre><code class="language-python" id="code-41">from captum.attr import IntegratedGradients</code></pre>
             </div>
             
         </div>
         <p>Differently to the previous class, we can give <code>IntegratedGradients</code> the whole test dataset in one go, setting the target to either <strong>0</strong> or <strong>1</strong>. Here we have set it as <strong>1</strong>, meaning positive values will indicate the feature contributes to the prediction of the <strong>malignant</strong> class and negative values means it <strong>supressess</strong> predictions of the malignant class.<br><br>It is an important point to distinguish, negative values are not necessarily predictive of <strong>benign</strong> (although they may well be). To find which ones are we would have to change the target to <strong>0</strong>.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-41"># FIXED WITH NO OUTPUT
-
-# Move to CPU just in case for apple users
+                <pre><code class="language-python" id="code-42"># Move to CPU just in case for apple users
 model.cpu()
 test_input_cpu = test_input_tensor.cpu()
 test_input_cpu.requires_grad_()
@@ -532,9 +515,7 @@ model.to(device);  # move back to original device </code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-42"># FIXED WITH OUTPUT
-
-def visualise_importances(feature_names, importances, title=&quot;&quot;, xaxis_title=&quot;Feature Attribution&quot;):
+                <pre><code class="language-python" id="code-43">def visualise_importances(feature_names, importances, title=&quot;&quot;, xaxis_title=&quot;Feature Attribution&quot;):
     &quot;&quot;&quot;
         Plotting function for feature importances
     &quot;&quot;&quot;    
@@ -565,9 +546,7 @@ Feature most negatively attributed to malignancy: radius2
         <h4>Distribution of scores</h4><p>Means of scores can often be misleading, especially for feature attribution methods where <strong>zero</strong> indicates no contribution to the prediction either positively or negatively. Plotting a histogram of the attributions can give a better sense of the distribution.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-43"># FIXED WITH OUTPUT
-
-fig, ax = plt.subplots(1, 2, figsize=(10, 4))
+                <pre><code class="language-python" id="code-44">fig, ax = plt.subplots(1, 2, figsize=(10, 4))
 
 ax[0].hist(all_best);
 ax[0].set_title(f&quot;Distribution of most positive correlated feature: \n {positive_feature}&quot;);
@@ -584,9 +563,7 @@ plt.show()</code></pre>
         <p>Both distributions for the most positive and negative predictions are centered around 0 as most samples have a feature attribution score of <code>0</code>. This indicates that in the majority of cases, most values for these features do not contribute much at all. This could be likely for all features.</p><h4>Scores per value</h4><p>This distribution is to be expected, it is not the average values that are typically indicative of how one class differs from another, but rather the outliers and unique measurements. We therefore want to build a profile of how the <em>range</em> of values in a feature changes its contribution to the prediction.<br><br>One way to do this is to split the range of values for a feature into discrete <em>bins</em>, each summarised by the count and mean attribution score of the samples within. For example, with <strong>smoothness3</strong> we could take all values between <strong>0 and 0.1</strong>, count them, and calculate their mean attribution score, before moving on to <strong>0.1 and 0.2</strong>, and so on. Binning the results this way smooths out noisy variation, hopefully surfacing any underlying trends.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-44"># FIXED WITH NO OUTPUT
-
-from scipy import stats</code></pre>
+                <pre><code class="language-python" id="code-45">from scipy import stats</code></pre>
             </div>
             
         </div>
@@ -603,9 +580,7 @@ from scipy import stats</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-45"># FIXED WITH NO OUTPUT
-
-# Revert the scaling
+                <pre><code class="language-python" id="code-46"># Revert the scaling
 X_test_unscaled = scaler.inverse_transform(X_test)</code></pre>
             </div>
             
@@ -613,9 +588,7 @@ X_test_unscaled = scaler.inverse_transform(X_test)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-46"># FIXED WITH NO OUTPUT
-
-# Get the indexes of the best features
+                <pre><code class="language-python" id="code-47"># Get the indexes of the best features
 best_positive_idx = np.argmax(attr_means)
 best_negative_idx = np.argmin(attr_means)</code></pre>
             </div>
@@ -624,9 +597,7 @@ best_negative_idx = np.argmin(attr_means)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-47"># FIXED WITH NO OUTPUT
-
-# Bin the positive feature 
+                <pre><code class="language-python" id="code-48"># Bin the positive feature 
 # Rather than plotting every individual sample, we group the feature values into
 # 6 equal-width bins and summarise each bin by its mean attribution score and sample count. 
 bin_means, bin_edges, _ = stats.binned_statistic(
@@ -670,9 +641,7 @@ bin_centers_neg = bin_edges_neg[1:] - bin_width_neg / 2</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-48"># FIXED WITH OUTPUT
-
-# Plot 
+                <pre><code class="language-python" id="code-49"># Plot 
 fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 
 ax[0].scatter(bin_centers, bin_means, s=bin_count)
@@ -708,6 +677,14 @@ plt.show()</code></pre>
                 <p><strong>3.</strong></p>
                 <p>Repeat the binned scores process for the attribution scores with the target set to <strong>zero</strong> (benign). However, still plot the binned scores for <strong>smothness3</strong> and <strong>radius2</strong>. How do they compare with the scores when the target is <strong>one</strong>.</p>
             </div>
+        </div>
+        
+        <div class="code-area">
+            <div class="code-container code-fixed">
+                <pre><code class="language-python" id="code-50"># Download this notebook from the &#x27;Resources&#x27; section, bottom left of this page,
+# and write your code in this cell.</code></pre>
+            </div>
+            
         </div>
         
                     </div>
