@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
-    
+
     <!-- Core Stylesheets -->
     <link rel="stylesheet" href=../assets/colours.css>
     <link rel="stylesheet" href="../assets/shared-styles.css">
@@ -39,12 +39,11 @@
     <link rel="stylesheet" href="../assets/box_styles.css">
     <link rel="stylesheet" href="../assets/code_styles.css">
     <link rel="stylesheet" href="../assets/static_output.css">
-
     <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scryptIQ - AI2 - Implementing a CNN in PyTorch</title>
-        
+    
 </head>
 <body>
     
@@ -94,10 +93,10 @@
             <li><a href="./report-issue.html">Report an Issue</a></li>
         </h3>
     </div>
-    
+
     <!-- Sidebar Toggle Button -->
     <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
-    
+
     <!-- Main Content Area -->
     <div id="main-content" class="main-content">
         <!-- Top Navigation Bar -->
@@ -146,9 +145,7 @@
                         <p>First lets setup the notebook with the necessary imports:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-12"># FIXED WITH NO OUTPUT
-
-import torch # the PyTorch module
+                <pre><code class="language-python" id="code-12">import torch # the PyTorch module
 import torch.nn as nn # the neural network module
 import torch.nn.functional as F # the functional module
 import torch.optim as optim # the optimiser module
@@ -172,9 +169,7 @@ torch.manual_seed(SEED);</code></pre>
         <p>And import the MNIST dataset again:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-13"># FIXED WITH NO OUTPUT
-
-# Normalise the data to have mean 0 and std 1 using dataset statistics
+                <pre><code class="language-python" id="code-13"># Normalise the data to have mean 0 and std 1 using dataset statistics
 transform = transforms.Compose([
                           transforms.ToTensor(),    # convert the image to a tensor
                           transforms.Normalize((0.1307,), (0.3081,)) # normalise the image
@@ -223,9 +218,7 @@ test_loader = torch.utils.data.DataLoader(
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-14"># FIXED WITH NO OUTPUT
-
-# define the CNN
+                <pre><code class="language-python" id="code-14"># define the CNN
 class CNN(nn.Module):
     def __init__(self):
         super().__init__()
@@ -287,9 +280,7 @@ class CNN(nn.Module):
                         <p>For the training and testing we can utilise the functions that we defined in the <a href="../AI1/testing-inference.html">previous lesson</a>, as it is the same process. The data is loaded, predictions made, loss calculated, and then the weights updated during the backwards pass.<br><br>The only change that has been made is that we will now track training loss, as well as testing loss and accuracy.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-15"># FIXED WITH NO OUTPUT
-
-def train(model, device, train_loader, optimiser, epoch):
+                <pre><code class="language-python" id="code-15">def train(model, device, train_loader, optimiser, epoch):
     &quot;&quot;&quot;
     Train a neural network model for one epoch.
     
@@ -342,9 +333,7 @@ def train(model, device, train_loader, optimiser, epoch):
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-16"># FIXED WITH NO OUTPUT
-
-# Define a function to test the model
+                <pre><code class="language-python" id="code-16"># Define a function to test the model
 def test(model, device, test_loader):
     &quot;&quot;&quot;
     Evaluate a trained neural network model on the test dataset.
@@ -395,9 +384,7 @@ def test(model, device, test_loader):
         <p>Training the model for only <strong>5 epochs</strong> still generates very good predictions from the very start, demonstrating the power of CNNs on previously difficult datasets.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-17"># FIXED WITH OUTPUT
-
-# instantiate the CNN
+                <pre><code class="language-python" id="code-17"># instantiate the CNN
 model = CNN()
 
 # Define the device
@@ -424,9 +411,7 @@ model = model.to(device)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-18"># FIXED WITH OUTPUT
-
-# define the loss function
+                <pre><code class="language-python" id="code-18"># define the loss function
 criterion = nn.CrossEntropyLoss()
 
 # define the optimiser
@@ -481,8 +466,7 @@ Train Epoch: 4 [0/60000 (0%)]	Loss: 0.092941
                         <p>The plot below is very common in <em>machine learning</em>, the training and testing loss every epoch of training. Typically, you will see a rapid, exponential decline in loss during the first new epochs, eventually leading to a plateau.<br><br>We don&#x27;t want the <strong>training loss</strong> to be lower (or much lower) than the <strong>testing loss</strong>, as this is an indication of overfitting. Once the training begins to plateau it is a good idea to stop the training early, saving you time and resources, as well as preventing overfitting as the model tries to seek minimal gains.<br><br>In the next page we will demonstrate some techniques to meet these goals programmatically.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-19"># FIXED WITH OUTPUT
-x_epochs = range(1, len(train_losses) + 1)
+                <pre><code class="language-python" id="code-19">x_epochs = range(1, len(train_losses) + 1)
 # plot the training and validation loss
 plt.plot(x_epochs, train_losses, label=&#x27;Training loss&#x27;)
 plt.plot(x_epochs, test_losses, label=&#x27;Validation loss&#x27;)
@@ -498,9 +482,7 @@ plt.show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-20"># FIXED WITH OUTPUT
-
-# set the model to evaluation mode before making predictions
+                <pre><code class="language-python" id="code-20"># set the model to evaluation mode before making predictions
 model.eval()
 
 # obtain one batch of test images
@@ -549,9 +531,7 @@ plt.show()</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-21"># FIXED WITH NO OUTPUT
-
-# Write any code here:</code></pre>
+                <pre><code class="language-python" id="code-21"># Write any code here:</code></pre>
             </div>
             
         </div>
@@ -569,7 +549,7 @@ plt.show()</code></pre>
                 </div>
             </div>
             
-        
+
         <div class="page-navigation">
             <a href="./what-is-a-cnn.html" class="nav-button prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -583,7 +563,7 @@ plt.show()</code></pre>
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                 </svg>
             </a></div>
-        
+
         <!-- Footer -->
         <div class="footer">
             <div>© All materials are copyright scryptIQ 2025</div>
@@ -598,13 +578,13 @@ plt.show()</code></pre>
     <script>
         // Set page ready flag immediately for PDF generation
         window.pageReady = true;
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });
         });
     </script>
+
 </body>
 </html>
-    
