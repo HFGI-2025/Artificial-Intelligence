@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
-    
+
     <!-- Core Stylesheets -->
     <link rel="stylesheet" href=../assets/colours.css>
     <link rel="stylesheet" href="../assets/shared-styles.css">
@@ -39,12 +39,11 @@
     <link rel="stylesheet" href="../assets/box_styles.css">
     <link rel="stylesheet" href="../assets/code_styles.css">
     <link rel="stylesheet" href="../assets/static_output.css">
-
     <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scryptIQ - AI1 - Testing & Inference</title>
-        
+    
 </head>
 <body>
     
@@ -93,10 +92,10 @@
             <li><a href="./report-issue.html">Report an Issue</a></li>
         </h3>
     </div>
-    
+
     <!-- Sidebar Toggle Button -->
     <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
-    
+
     <!-- Main Content Area -->
     <div id="main-content" class="main-content">
         <!-- Top Navigation Bar -->
@@ -254,9 +253,7 @@ $$<br><br>Each row of $X$ corresponds to one possible input combination for the 
         <p>The code below trains a simple neural network to predict the correct output $y$, given the inputs $x1$ and $x2$.<br><br>The code defines variables for <code>epochs</code> and <code>learning_rate</code>, so these can be easily adjusted, and the code cell re-run. A prediction and loss calculation are performed at each epoch, and the code uses a conditional statement and the modulus operator <code>%</code> to print the loss and epoch number, every 500 epochs.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-20"># FIXED WITH NO OUTPUT
-
-# Import needed modules
+                <pre><code class="language-python" id="code-21"># Import needed modules
 import numpy as np
 import torch
 import matplotlib.pyplot as plt</code></pre>
@@ -266,22 +263,18 @@ import matplotlib.pyplot as plt</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-21"># FIXED WITH NO OUTPUT
-
-# Fix the numpy and torch seeds for reproducibility
+                <pre><code class="language-python" id="code-22"># Fix the numpy and torch seeds for reproducibility
 # Parameters are randomised by default, therefore we need to fix them
 SEED = 42
 np.random.seed(SEED)
 torch.manual_seed(SEED)</code></pre>
             </div>
-            <div class="output-container"><pre class="output-result">&lt;torch._C.Generator at 0x7f50145f7690&gt;</pre></div>
+            
         </div>
         <p>We will define some data for our model to learn. As there are only <strong>4</strong> possible combinations the <em>training</em> and <em>test</em> data will be identical, but in different orders.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-22"># FIXED WITH OUTPUT
-
-X_train = np.array(
+                <pre><code class="language-python" id="code-23">X_train = np.array(
     [[0, 0],
     [0, 1],
     [1, 0],
@@ -309,9 +302,7 @@ y_test = torch.from_numpy(y_test)</code></pre>
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-23"># FIXED WITH NO OUTPUT
-
-# Define the training parameters and model input/output
+                <pre><code class="language-python" id="code-24"># Define the training parameters and model input/output
 
 # The number of epochs is the number of times the training data is passed through the single-layer neural network:
 epochs = 5000
@@ -330,9 +321,7 @@ output_size = 1</code></pre>
         <p>The <em>loop</em> below is a <em>manual</em> implementation of some of <strong>PyTorch&#x27;s</strong> training process, much of this will be not needed in practice, but will serve to help you follow what is happening in the background.<br><br>Breaking down the training process:<br><ol class="nested-list"><li>A prediction is made with <em>untrained</em> weights</li><br><li>Predicted probabilities of belonging to a certain class are computed using the <em>sigmoid</em> function</li><br><li>Predicted classes are then obtained by <em>thresholding</em> (or rounding) those probabilities</li><br><li><strong>Loss</strong> is calculated</li><br><li>Loss is used to <em>update weights</em> in the <em>backward pass</em></li></ol></p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-24"># FIXED WITH OUTPUT
-
-losses = []
+                <pre><code class="language-python" id="code-25">losses = []
 w = torch.randn(input_size, output_size, requires_grad=True)
 b = torch.randn(1, 1, requires_grad=True)
 
@@ -380,9 +369,7 @@ Epoch: 4000 | loss: 0.0135
         <p>As we saw in the previous section, as the model is trained, the loss decreases. As visualised below:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-25"># FIXED WITH OUTPUT
-
-# Plot the loss over time:
+                <pre><code class="language-python" id="code-26"># Plot the loss over time:
 plt.plot(losses)
 plt.xlabel(&#x27;Epochs&#x27;)
 plt.ylabel(&#x27;Loss&#x27;)
@@ -416,9 +403,7 @@ plt.show()
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-26"># FIXED
-
-# Download this notebook and write your code here.</code></pre>
+                <pre><code class="language-python" id="code-27"># Download this notebook and write your code here.</code></pre>
             </div>
             
         </div>
@@ -434,9 +419,7 @@ plt.show()
                         <p>Now that we have a trained model, we can assess its <em>performance</em>. First, we obtain the predictions on the <em>test</em> dataset:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-27"># FIXED WITH OUTPUT
-
-# Calculate the output of the neuron:
+                <pre><code class="language-python" id="code-28"># Calculate the output of the neuron:
 y_pred = torch.matmul(X_test, w) + b
 
 # Apply a sigmoid activation function to the output of the neuron:
@@ -455,9 +438,7 @@ print(y_pred)</code></pre>
         <p>The <em>sigmoid</em> activation function places the values <em>near</em> to <strong>1</strong> for the positive class and <strong>0</strong> for the negative class. Using <em>numpy&#x27;s</em> round function we can convert them to the class.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-28"># FIXED WITH OUTPUT
-
-y_class = np.round(y_pred)
+                <pre><code class="language-python" id="code-29">y_class = np.round(y_pred)
 print(y_class)</code></pre>
             </div>
             <div class="output-container"><pre class="output-stream">[[0.]
@@ -469,9 +450,7 @@ print(y_class)</code></pre>
         <p>Next we can obtain the accuracy of the model on the test dataset and also visually inspect the output to see how well our trained model solves the task:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-29"># FIXED WITH OUTPUT
-
-from sklearn.metrics import accuracy_score
+                <pre><code class="language-python" id="code-30">from sklearn.metrics import accuracy_score
 
 print(f&quot;Accuracy: {accuracy_score(y_test, y_class) * 100}%&quot;)</code></pre>
             </div>
@@ -481,9 +460,7 @@ print(f&quot;Accuracy: {accuracy_score(y_test, y_class) * 100}%&quot;)</code></p
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-30"># FIXED WITH OUTPUT
-
-# Visualise the real labels of the AND gate to the predicted labels from the perceptron:
+                <pre><code class="language-python" id="code-31"># Visualise the real labels of the AND gate to the predicted labels from the perceptron:
 
 # Make two subplots, side by side:
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
@@ -546,7 +523,7 @@ plt.show()</code></pre>
                 </div>
             </div>
             
-        
+
         <div class="page-navigation">
             <a href="./training.html" class="nav-button prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -560,7 +537,7 @@ plt.show()</code></pre>
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                 </svg>
             </a></div>
-        
+
         <!-- Footer -->
         <div class="footer">
             <div>© All materials are copyright scryptIQ 2025</div>
@@ -575,13 +552,13 @@ plt.show()</code></pre>
     <script>
         // Set page ready flag immediately for PDF generation
         window.pageReady = true;
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });
         });
     </script>
+
 </body>
 </html>
-    
