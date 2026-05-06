@@ -112,6 +112,51 @@
                     Assignment <span class="module-tag">AI3</span>
                 </div>
             </div>
+            <div class="module-card" id="assignment-background">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Assignment Background:</h3>
+                        <p>Timely submission will result in your assignment being returned within 14 days of the submission deadline. Marked Jupyter Notebook manuscripts will be returned with comments from your marker. If you receive a pass or distinction, your marker will attach the model solutions for this assignment <em>via</em> the open pull request on your lesson&#x27;s GitHub repository.<br>The aim of this assignment is to recreate the workflow of the image section of this lesson, using a different dataset. The dataset will be the PneumoniaMNIST dataset that was used in the previous lesson&#x27;s assignment.<br><br>Given the time required to train and optimise a model, we have trained a CNN that can be found in the <a href="../data/pneumonia_model.pth">data</a> folder. The architecture has been provided for you to load the model, which achieved an accuracy of 85% on the test set.<br><br>Your task is to investigate how the model is making correct predictions (true positives: images correctly identified as pneumonia) and why it is making incorrect predictions (false negatives: pneumonia cases the model missed).<br><br>As these are real world datasets the findings from the solutions may not be immediately obvious, as we are not specialists in pneumonia chest x-rays, so do not worry too much about interpreting the output itself.</p><h4>Important!</h4><p>The code given to you will download the <em>PneumoniaMNIST</em> into your CodeSpace workspace. This file is too large to be hosted on GitHub and will cause an error when you try to push your assignment back. Please remember to <strong>delete</strong> the data before you do. If you do accidentally push your assignment back with the data you will need to firstly <em>delete</em> the data and then go through your git history and delete its reference there.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="question-1">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Question 1:</h3>
+                        <p><strong>Task 1:</strong><ul class="nested-list"><li>Download the PneumoniaMNIST dataset</li><br><li>Load the test dataset into a DataLoader</li><br><li>Initialise the <code>PneumoniaCNN</code> model and load the saved weights from <code>../data/pneumonia_model.pth</code></li></ul>The code for most of this has already been given to you.<br><strong>Task 2:</strong><ul class="nested-list"><li>Select <strong>3</strong> images from the test set that are correctly predicted by the model (true positives: predicted pneumonia, label is pneumonia).</li><br><li>Select <strong>3</strong> images from the test set that are incorrectly predicted by the model (false negatives: predicted normal, label is pneumonia).</li><br><li>In two separate plots, display the images and their predicted labels.</li></ul>Some help:<br><br>The code to load all test labels and run predictions is provided below.<br><br>To filter the images, collect the <strong>index</strong> of each sample where the prediction and true label match the required condition. For true positives both values will <strong>equal 1</strong>; for false negatives the prediction will be <strong>0</strong> and the label <strong>1</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="question-2">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Question 2</h3>
+                        <p><strong>Task 1:</strong><br><br>Generate an occlusion attribution heatmap for each image in each set by completing the following:<br><ul class="nested-list"><li>Create a function called <code>plot_occlusion_grid</code> that runs the occlusion attribution and displays results in a <strong>3 × 2</strong> grid of subplots — the greyscale image on the left, the occlusion heatmap on the right</li><br><li>Set the sliding window shape and strides for an image with <strong>1</strong> channel</li><br><li>Transpose the attribution output before plotting</li><br><li>Use <strong>Captum&#x27;s</strong> visualisation function with <code>use_pyplot=False</code> for the heatmap</li></ul>All the code is in the lesson notebook and only needs to be adapted for a single-channel image and wrapped in a function.<br><strong>Task 2</strong><br><ol class="nested-list"><li>Call <code>plot_occlusion_grid</code> with the true positive images</li><br><li>Call <code>plot_occlusion_grid</code> with the false negative images</li></ol>Are there any obvious differences between the two sets?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="question-3">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Question 3</h3>
+                        <p><strong>Task 1:</strong><br><br>Create a function called <code>plot_lime_grid</code> that calculates and plots segment-level attributions using LIME:<br><ul class="nested-list"><li>Use Otsu thresholding followed by connected components to segment the image</li><br><li>Convert the segment labels into a Captum feature mask and pass it to the LIME attribution method</li><br><li>Plot the greyscale image on the left and the LIME attribution heatmap on the right in a <strong>3 × 2</strong> grid</li></ul><strong>Task 2</strong><br><br>Call <code>plot_lime_grid</code> first with the <strong>true positives</strong> and then with the <strong>false negatives</strong>, as you did in Question 2, Task 2.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="module-card" id="thoughts">
+                <div class="module-body">
+                    <div class="module-section">
+                        <h3>Thoughts</h3>
+                        <p>Which approach do you think is more informative for the issue at hand?<br><br><em>Note: Any musings are not marked, they are just to promote thought on the approach</em></p>
+                    </div>
+                </div>
+            </div>
+            
 
         <div class="page-navigation">
             <a href="./tabular-xAI.html" class="nav-button prev">
