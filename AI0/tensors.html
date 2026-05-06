@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
-    
+
     <!-- Core Stylesheets -->
     <link rel="stylesheet" href=../assets/colours.css>
     <link rel="stylesheet" href="../assets/shared-styles.css">
@@ -39,12 +39,11 @@
     <link rel="stylesheet" href="../assets/box_styles.css">
     <link rel="stylesheet" href="../assets/code_styles.css">
     <link rel="stylesheet" href="../assets/static_output.css">
-
     <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scryptIQ - AI0 - Tensors</title>
-        
+    
 </head>
 <body>
     
@@ -83,10 +82,10 @@
             <li><a href="./report-issue.html">Report an Issue</a></li>
         </h3>
     </div>
-    
+
     <!-- Sidebar Toggle Button -->
     <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
-    
+
     <!-- Main Content Area -->
     <div id="main-content" class="main-content">
         <!-- Top Navigation Bar -->
@@ -248,9 +247,7 @@ $$<br><br>This matrix is a <strong>tensor</strong>. In this case, it is a two-di
                         <p>Nearly every operation in PyTorch involves creating, transforming or computing tensors, and much of the framework is built around a specific class: <code>torch.Tensor</code>. For this reason, it is worth becoming familiar with how tensors are defined and manipulated early on.</p><h4>Importing PyTorch for this notebook</h4>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-4"># FIXED WITH OUTPUT
-
-import torch
+                <pre><code class="language-python" id="code-4">import torch
 
 print(f&quot;PyTorch version: {torch.__version__}&quot;)</code></pre>
             </div>
@@ -270,9 +267,7 @@ print(f&quot;PyTorch version: {torch.__version__}&quot;)</code></pre>
         <h4>Scalars</h4><p>The simplest tensor we can create is a <strong>scalar</strong>. A scalar is a single numerical value and, in tensor terminology, it is referred to as a <strong>zero-dimensional tensor</strong>. Despite its simplicity, a scalar is still a tensor and supports the same underlying operations as higher-dimensional tensors.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-5"># FIXED WITH OUTPUT
-
-# Scalar
+                <pre><code class="language-python" id="code-5"># Scalar
 
 scalar = torch.tensor(7)
 
@@ -294,9 +289,7 @@ print(f&quot;{scalar}, {type(scalar)}&quot;, sep=&quot;\n&quot;)</code></pre>
         <h4>Vectors</h4><p>Next, let&#x27;s create a <strong>vector</strong>. A vector is a one-dimensional tensor that can contain multiple numerical values. Unlike a scalar, which represents a single quantity, a vector allows us to represent several related measurements together in a structured way.<br><br>For example, a vector such as <code>[3, 2]</code> could be used to describe the number of <code>[leaves, petals]</code> on a flower. Extending this idea, a vector with the values <code>[3, 2, 5]</code> could represent <code>[leaves, petals, seeds]</code>. Each position in the vector, in this case, corresponds to a specific attribute, and the ordering of values gives them meaning, within the context of a vector.<br><br>The key idea is that vectors provide a flexible way to represent collections of related data. This same principle extends to higher-dimensional tensors, which allow increasingly complex data structures to be represented in a consistent numerical form.<br><br>Using the example above, we can create a tensor of type vector, using <code>torch.tensor</code>:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-6"># FIXED WITH OUTPUT
-
-# Vector
+                <pre><code class="language-python" id="code-6"># Vector
 
 vector = torch.tensor([3, 2, 2])
 
@@ -308,9 +301,7 @@ print(f&quot;{vector}, {type(vector)}&quot;, sep=&quot;\n&quot;)</code></pre>
         <h4>Matrices</h4><p>Moving up the hierarchy of tensor types, let&#x27;s now consider <strong>matrices</strong>. A matrix is a <em>two-dimensional tensor</em>, which allows us to represent <em>multiple related vectors</em> together in a structured way. While a vector can describe a single object using multiple values, a matrix can describe multiple objects that share the same set of attributes.<br><br>Let&#x27;s take an example of representing two flowers. The first flower has 3 leaves, 2 petals and 2 seeds, while the second flower has 4 leaves, 3 petals and 1 seed. Each flower can be represented as a vector of measurements, and these vectors can be stacked together to form a matrix:<br><br>\begin{pmatrix}<br>3 &amp; 2 &amp; 2 \\<br>4 &amp; 3 &amp; 1<br>\end{pmatrix}<br><br>In this matrix representation, each row corresponds to a flower, and each column corresponds to a specific attribute (leaves, petals and seeds). Matrices are commonly used to represent tabular data, where multiple observations are described by the same set of features; they form a natural bridge between vectors and higher-dimensional tensors.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-7"># FIXED WITH OUTPUT
-
-# Matrix
+                <pre><code class="language-python" id="code-7"># Matrix
 matrix = torch.tensor([[3, 2, 2],
                        [4, 3, 1]])
 print(f&quot;{matrix}, {type(matrix)}&quot;, sep=&quot;\n&quot;)</code></pre>
@@ -322,9 +313,7 @@ print(f&quot;{matrix}, {type(matrix)}&quot;, sep=&quot;\n&quot;)</code></pre>
         <h4>3-dimensional tensors</h4><p>Moving further up the hierarchy again, we arrive at <strong>3-dimensional tensors</strong>. A 3-dimensional tensor extends the idea of a matrix in the same way that a matrix extends a vector: it allows us to represent <strong>multiple matrices stacked together along a new dimension</strong>.<br><br>Where a matrix is a collection of vectors, a <em>3-D tensor is a <strong>collection of matrices</strong></em>. This additional dimension can be used to represent different contexts, conditions or groupings of the same type of data. For example, in our flower dataset, a matrix might describe multiple flowers at a single time point, while a 3-dimensional tensor could represent measurements of those flowers taken across multiple days or different experimental conditions.<br><br>In practice, 3-dimensional tensors are commonly encountered when working with structured data such as images with colour channels, sequences of measurements over time, or grouped observations. Each dimension adds a new axis along which the data varies, while preserving a consistent internal structure. This ability to represent increasingly complex data in a systematic way is what makes tensors such a powerful abstraction in machine learning and deep learning.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-8"># FIXED WITH OUTPUT
-
-# 3-dimensional tensor
+                <pre><code class="language-python" id="code-8"># 3-dimensional tensor
 tensor_3d = torch.tensor([[[3, 2, 2],
                            [4, 3, 1],
                            [6, 3, 4]]])
@@ -347,9 +336,7 @@ print(f&quot;{tensor_3d}, {type(tensor_3d)}&quot;, sep=&quot;\n&quot;)</code></p
                         <p>Once tensors are created, we usually need to retrieve specific parts of them. Indexing lets us access one element or one row, while slicing lets us select ranges such as whole columns. This is a core skill for preparing data before model training.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-9"># FIXED WITH OUTPUT
-
-x = torch.tensor([[10, 20, 30],
+                <pre><code class="language-python" id="code-9">x = torch.tensor([[10, 20, 30],
                   [40, 50, 60]])
 
 print(&quot;First row:&quot;, x[0])
@@ -374,9 +361,7 @@ Single element (row 2, col 3): tensor(60)
                         <p>In practical workflows, the same data often needs to be rearranged into different shapes. Reshaping changes the structure of a tensor without changing the underlying values, as long as the total number of elements stays the same.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-10"># FIXED WITH OUTPUT
-
-x = torch.arange(12)
+                <pre><code class="language-python" id="code-10">x = torch.arange(12)
 print(&quot;Original:&quot;, x)
 print(&quot;Original shape:&quot;, x.shape)
 
@@ -407,9 +392,7 @@ New shape: torch.Size([3, 4])
                         <p>Element-wise operations are fundamental in tensor workflows. PyTorch lets you perform arithmetic between tensors and between a tensor and a scalar using standard mathematical operators.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-11"># FIXED WITH OUTPUT
-
-a = torch.tensor([1, 2, 3])
+                <pre><code class="language-python" id="code-11">a = torch.tensor([1, 2, 3])
 b = torch.tensor([4, 5, 6])
 c = 10
 
@@ -439,9 +422,7 @@ tensor([0.2500, 0.4000, 0.5000])
                         <p>PyTorch provides helper functions for common tensor initialisation patterns. These are used frequently when setting up model inputs, masks or parameter values.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-12"># FIXED WITH OUTPUT
-
-size = 2, 3
+                <pre><code class="language-python" id="code-12">size = 2, 3
 
 zeros = torch.zeros(size)
 ones = torch.ones(size)
@@ -449,8 +430,7 @@ random_uniform = torch.rand(size)
 
 print(&quot;Zeros:\n&quot;, zeros)
 print(&quot;\nOnes:\n&quot;, ones)
-print(&quot;\nRandom uniform:\n&quot;, random_uniform)
-</code></pre>
+print(&quot;\nRandom uniform:\n&quot;, random_uniform)</code></pre>
             </div>
             <div class="output-container"><pre class="output-stream">Zeros:
  tensor([[0., 0., 0.],
@@ -461,8 +441,8 @@ Ones:
         [1., 1., 1.]])
 
 Random uniform:
- tensor([[0.1322, 0.3381, 0.9701],
-        [0.5383, 0.3288, 0.4680]])
+ tensor([[0.0216, 0.5831, 0.5082],
+        [0.4808, 0.0103, 0.2807]])
 </pre></div>
         </div>
         
@@ -582,9 +562,7 @@ Random uniform:
         <p>Integer tensors are often used for:<br><ul class="nested-list"><li>class labels</li><br><li>indices</li><br><li>counters</li><br><li>categorical data</li></ul>They are typically <strong>not</strong> used for gradient-based learning, since most optimisation algorithms require floating point arithmetic.</p><h4>Precision and performance trade-offs</h4><p>The reason for having multiple datatypes is tied to <strong>precision in computing</strong>, which refers to how much numerical detail is used to represent a value. Higher-precision datatypes can represent numbers more accurately, but they require more memory and computational effort.<br><br>In deep learning, models perform an enormous number of numerical operations. Using higher precision everywhere can be unnecessarily expensive, while lower precision can improve speed and reduce memory usage. This leads to a trade-off:<br><ul class="nested-list"><li><strong>Higher precision</strong></li></ul>More accurate numerical representation, but slower computation and higher memory use.<br><ul class="nested-list"><li><strong>Lower precision</strong></li></ul>Faster computation and lower memory use, but potentially reduced numerical stability or accuracy.<br><br>Modern deep learning workflows often balance these trade-offs carefully, for example by combining multiple datatypes within the same model.</p><h4>Typecasting tensor data</h4><p>You can explicitly control the datatype of a tensor using the <code>dtype</code> parameter when creating it. As we have done with base Python data types in our Python Fundamentals module, using this keyword argument when instantiating an instance of class <code>torch.tensor</code> constitutes <strong>typecasting</strong> input data explicitly into your chosen data type.<br><br>In the code cell below, we demonstrate typecasting tensor data:</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-13"># FIXED WITH OUTPUT
-
-x_float32 = torch.tensor([1, 2, 3], dtype=torch.float32)
+                <pre><code class="language-python" id="code-13">x_float32 = torch.tensor([1, 2, 3], dtype=torch.float32)
 x_float16 = torch.tensor([1, 2, 3], dtype=torch.float16)
 x_int64   = torch.tensor([1, 2, 3], dtype=torch.int64)
 
@@ -611,7 +589,7 @@ Tensor: tensor([1, 2, 3]) | dtype: torch.int64
                 </div>
             </div>
             
-        
+
         <div class="page-navigation">
             <a href="./pytorch.html" class="nav-button prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -619,7 +597,7 @@ Tensor: tensor([1, 2, 3]) | dtype: torch.int64
                 </svg>
                 Previous
             </a></div>
-        
+
         <!-- Footer -->
         <div class="footer">
             <div>© All materials are copyright scryptIQ 2025</div>
@@ -634,13 +612,13 @@ Tensor: tensor([1, 2, 3]) | dtype: torch.int64
     <script>
         // Set page ready flag immediately for PDF generation
         window.pageReady = true;
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });
         });
     </script>
+
 </body>
 </html>
-    

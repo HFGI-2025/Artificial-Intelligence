@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../assets/android-chrome-512x512.png">
-    
+
     <!-- Core Stylesheets -->
     <link rel="stylesheet" href=../assets/colours.css>
     <link rel="stylesheet" href="../assets/shared-styles.css">
@@ -39,12 +39,11 @@
     <link rel="stylesheet" href="../assets/box_styles.css">
     <link rel="stylesheet" href="../assets/code_styles.css">
     <link rel="stylesheet" href="../assets/static_output.css">
-
     <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>scryptIQ - AI0 - PyTorch</title>
-        
+    
 </head>
 <body>
     
@@ -83,10 +82,10 @@
             <li><a href="./report-issue.html">Report an Issue</a></li>
         </h3>
     </div>
-    
+
     <!-- Sidebar Toggle Button -->
     <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
-    
+
     <!-- Main Content Area -->
     <div id="main-content" class="main-content">
         <!-- Top Navigation Bar -->
@@ -280,9 +279,7 @@
         
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-1"># FIXED WITH OUTPUT
-
-import torch
+                <pre><code class="language-python" id="code-1">import torch
 
 print(torch.__version__)</code></pre>
             </div>
@@ -292,9 +289,7 @@ print(torch.__version__)</code></pre>
         <p>For our setup we have chosen the <strong>2.5.1</strong> version, as this is the most up to date, CPU only version. As of writing the latest stable version was <strong>2.9.1</strong>.</p><h4>Finding out what is avaiable</h4><p>The following code is used in the lessons to check whether there is a GPU or MPS available, if not it falls back to the CPU.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-2"># FIXED WITH OUTPUT
-
-import torch
+                <pre><code class="language-python" id="code-2">import torch
 import torch.nn as nn
 
 # Check if GPU is available
@@ -335,9 +330,7 @@ model.to(device)</code></pre>
                         <p>After installation and import checks, it is useful to run one small tensor example to confirm that core PyTorch operations are working as expected.</p>
         <div class="code-area">
             <div class="code-container code-fixed">
-                <pre><code class="language-python" id="code-3"># FIXED WITH OUTPUT
-
-import torch
+                <pre><code class="language-python" id="code-3">import torch
 
 x = torch.tensor([[1.0, 2.0], [3.0, 4.0]])
 print(&quot;Tensor:\n&quot;, x)
@@ -391,7 +384,7 @@ x + 1:
                 </div>
             </div>
             
-        
+
         <div class="page-navigation">
             <a href="./what-is-ai.html" class="nav-button prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -405,7 +398,7 @@ x + 1:
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                 </svg>
             </a></div>
-        
+
         <!-- Footer -->
         <div class="footer">
             <div>© All materials are copyright scryptIQ 2025</div>
@@ -420,13 +413,13 @@ x + 1:
     <script>
         // Set page ready flag immediately for PDF generation
         window.pageReady = true;
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });
         });
     </script>
+
 </body>
 </html>
-    
